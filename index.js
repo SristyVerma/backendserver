@@ -20,7 +20,9 @@ app.use(express.json())
 app.use(cookieParser(""));
 app.use(router)
 
-
+app.get('/',(req,res)=>{
+    res.send(<h1>My Server</h1>)
+})
 
 
 
