@@ -21,7 +21,7 @@ app.use(cookieParser(""));
 app.use(router)
 
 app.get('/',(req,res)=>{
-    res.send(<h1>My Server</h1>)
+    res.send("<h1>My Server</h1>")
 })
 
 
