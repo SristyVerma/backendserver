@@ -78,7 +78,7 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-        res.status(400).json({error: "fill all the details" });
+        res.status(400).send("fill all the details" );
     }
 
     try {
@@ -95,7 +95,7 @@ router.post("/login", async (req, res) => {
             
 
             if (!isMatch) {
-                res.status(400).json({ error: "invalid crediential pass" });
+                res.status(400).send("invalid crediential pass" );
             }
              else {
                 
