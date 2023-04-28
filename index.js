@@ -13,8 +13,13 @@ const router=require('./routes/router')
 //database connection
 require('./db/connection')
 // DefaultData()
-app.use(cors())
-
+// app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['POST', 'GET', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
+}));
 
 
 app.use(express.json())

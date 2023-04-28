@@ -78,16 +78,16 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-        res.status(400).send("fill all the details" );
+        res.status(400).json({ error: "fill the details" });
     }
 
     try {
 
         const userlogin = await USER.findOne({ email: email });
-        // console.log(userlogin);
+        console.log(userlogin);
         if (userlogin) {
             const isMatch = await bcrypt.compare(password, userlogin.password);
-            // console.log(isMatch);
+            console.log(isMatch);
 
 
             //token generate in schema
@@ -95,31 +95,29 @@ router.post("/login", async (req, res) => {
             
 
             if (!isMatch) {
-                res.status(400).send("invalid crediential pass" );
+                res.status(400).json({ error: "invalid crediential pass" })
             }
-             else {
-                
-                
+            
 
-           
-                res.status(201).json(userlogin);
-            }
-
-        }else {
+        else {
             const token = await userlogin.generatAuthtoken();
             console.log(token);
             res.cookie("mycoookieforamazonclone", token, {
                 expires: new Date(Date.now() + 2589000),
                 httpOnly: true
             });
-
-            console.log("invalid details")
-            res.status(400).json({"error": "invalid details" });
+            res.status(201).json(userlogin);
+            // console.log("invalid details")
+            // res.status(400).json({"error": "invalid details" });
         }
-        
-    } catch (error) {
+    }
+    else {
+        res.status(400).json({ error: "user not exist" });
+    }
+    } 
+    catch (error) {
         res.status(400).json({ error: "invalid crediential pass" });
-        // console.log("error the bhai catch ma for login time" + error.message);
+        console.log("error the bhai catch ma for login time" + error.message);
     }
 });
 

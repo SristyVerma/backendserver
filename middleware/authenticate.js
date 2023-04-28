@@ -5,7 +5,7 @@ const keysecret= process.env.KEY
 const authenicate = async(req,res,next)=>{
     try {
         const token = req.cookies.mycoookieforamazonclone;
-        
+        console.log("middlewae token working")
         const verifyToken = jwt.verify(token,keysecret);
      
         const rootUser = await USER.findOne({_id:verifyToken._id,"tokens.token":token});
