@@ -15,11 +15,13 @@ require('./db/connection')
 // DefaultData()
 // app.use(cors())
 app.use(cors({
-  origin: 'https://amazonfrontend-jq85s9819-sristyverma.vercel.app',
-  methods: ['POST', 'GET', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true
-}));
+    origin: 'https://amazonfrontend-jq85s9819-sristyverma.vercel.app',
+    methods: ['POST', 'GET', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true,
+    exposedHeaders: ['set-cookie']
+  }));
+  
 
 
 app.use(express.json())
